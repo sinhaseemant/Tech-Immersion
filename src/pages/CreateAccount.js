@@ -1,8 +1,14 @@
 import { React, useState, useEffect } from "react";
-
 import { useNavigate } from "react-router-dom";
+import Image from "../assets/image.png";
+import Logo from "../assets/logo.png";
+import { FaEye } from "react-icons/fa6";
+import { FaEyeSlash } from "react-icons/fa6";
+
 
 const CreateAccount = () => {
+  
+  const [ showPassword, setShowPassword ] = useState(false);
   const [loginPassword, setLoginPassword] = useState("");
   const [loginUsername, setLoginUsername] = useState("");
 
@@ -34,34 +40,46 @@ const CreateAccount = () => {
     
   }
 
-
+  function gotoHomePage() {
+    navigate("/");
+  }
   console.log("CreateAccount is called");
   return (
-    <header className="Header">
-      <h2>Hospital Locator</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="UserName"
-          onChange={(e) => {
-            setLoginUsername(e.target.value);
-          }}
-        ></input>
+    <div className="login-signup-main">
+      <div className="login-signup-left">
+        <img src={Image} alt="" />
       </div>
-      <div>
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => {
-            setLoginPassword(e.target.value);
-          }}
-        ></input>
+      <div className="login-signup-right">
+        <div className="login-signup-right-container">
+          <div className="login-signup-logo">
+            <img src={Logo} alt="" />
+          </div>
+          <div className="login-signup-center">
+            <h2>Hospital Locator</h2>
+            <p>Register</p>
+            <form>
+              <input type="text" placeholder="Username" onChange={(e) => {
+                setLoginUsername(e.target.value);
+              }}/>
+              <input type="email" placeholder="Email" />
+              <div className="pass-input-div">
+                <input type={showPassword ? "text" : "password"} placeholder="Password" onChange={(e) => {
+                setLoginPassword(e.target.value);
+                }}/>
+                {showPassword ? <FaEyeSlash onClick={() => {setShowPassword(!showPassword)}} /> : <FaEye onClick={() => {setShowPassword(!showPassword)}} />}
+              </div>
+              <div className="login-signup-center-buttons">
+                <button onClick={createAccount} type="button">Sign up</button>
+              </div>
+            </form>
+          </div>
+
+          <p className="login-signup-bottom-p">
+            Already have an account? <a href="#" onClick={gotoHomePage}>Log in</a>
+          </p>
+        </div>
       </div>
-      <div></div>
-      <div>
-        <button onClick={createAccount}>Create Account</button>
-      </div>
-    </header>
+    </div>
   );
 };
 

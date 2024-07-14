@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-import './App.css';
 import LocateNearestHospital from './pages/LocateNearestHospital.js';
 import AdminLogin  from './pages/AdminLogin.js';
 import Crud from './pages/Crud.js';
