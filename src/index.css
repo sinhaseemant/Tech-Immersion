@@ -268,3 +268,8 @@ form button[type='button'] {
   max-width: 300px;
   font-size: 10px;
 }
+
+.textfield{
+  width: 300px;
+  margin-bottom: 10px !important;
+}

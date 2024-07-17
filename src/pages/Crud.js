@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-
+import { Autocomplete, TextField, Button, FormControl, Select, MenuItem, InputLabel } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Crud=()=> {
@@ -70,32 +70,40 @@ fetch("http://localhost:7071/api/addHospitalData", requestOptions)
     
         console.log("Home is called");
       return (
-        <header className="Header">
-
-          <h2>Hospital Locator Admin Operations</h2>
- <div>
- <input type="text" placeholder='Hospital Name' onChange={(e) => {
-            setHospitalName(e.target.value);
-          }}></input>
- </div>
- <div>
- <input type="text" placeholder='Address'onChange={(e) => {
-    setAddress(e.target.value);
-            
-          }}></input>
- </div>
- 
- <div>
- <input type="text" placeholder='Departments available'onChange={(e) => {
-            setSpeciality(e.target.value);
-          }}></input>
- </div><div>
-    
- <button onClick={PushtoDB}>Submit</button>
- </div><div>
- <button onClick={goToCreatePage}>Home</button>
- </div>
-        </header>
+<div className="container">
+<div className="top-right-buttons">
+        <Button onClick={() => navigate("/locate")} className="button">
+         Home
+        </Button>
+  </div>
+<div className="card">
+  <h2>Admin Operations</h2>
+  <TextField
+    className="textfield"
+    label="Hospital Name"
+    variant="outlined"
+    onChange={(e) => {
+      setHospitalName(e.target.value);
+    }}/>
+  <TextField
+    className="textfield"
+    label="Address"
+    variant="outlined"
+    onChange={(e) => {
+      setAddress(e.target.value);
+    }}/>
+  <TextField
+    className="textfield"
+    label="Departments Available"
+    variant="outlined"
+    onChange={(e) => {
+      setSpeciality(e.target.value);
+    }}/>
+  <Button onClick={PushtoDB} className="button">
+    Submit
+  </Button>
+</div>
+</div>
       );
     }
     
