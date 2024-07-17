@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {Autocomplete, Chip, TextField} from '@mui/material';
+import { Autocomplete, TextField, Button, FormControl, Select, MenuItem, InputLabel } from "@mui/material";
 //import axios from "axios";
 //import {Input, Card} from "antd";
 //import { AutoComplete } from 'primereact/autocomplete';
@@ -272,54 +272,61 @@ const debouncedFetchSearchResults = debounce(async()=>{
   };
 
   return (
-    <header className="Header">
-      <button onClick={findLocation}>Locate Me</button>
 
-      <div>
-        <select onChange={handleDept}>
-          <option value="ortho">Orthopaedics</option>
+<div className="container">
+<div className="top-right-buttons">
+        <Button onClick={() => navigate("/createAcc")} className="button">
+          Create Admin Account
+        </Button>
+        <Button onClick={() => navigate("/")} className="button">
+          Admin Login
+        </Button>
+  </div>
+<div className="card">
+  <h2>Locate Nearest Hospital</h2>
 
-          <option value="cardio">Cardiology</option>
+  <Button onClick={findLocation} className="button">
+    Locate Me
+  </Button>
 
-          <option value="gp">Others</option>
-          <option value="dental">Dental</option>
-          <option value="opthalmology">Opthalmology</option>
-        </select>
-      </div>
+  <FormControl variant="outlined" className="form-control">
+    <InputLabel>Select Department</InputLabel>
+    <Select className="select" value={dept} onChange={handleDept} label="Select Department">
+      <MenuItem value="ortho">Orthopaedics</MenuItem>
+      <MenuItem value="cardio">Cardiology</MenuItem>
+      <MenuItem value="gp">Others</MenuItem>
+      <MenuItem value="dental">Dental</MenuItem>
+      <MenuItem value="opthalmology">Opthalmology</MenuItem>
+    </Select>
+  </FormControl>
 
-      <button onClick={findHospital}>Find Nearest Hospital</button>
-      {nearestHospital && (
-        <div>
-          {" "}
-          <p>
-            The nearest Hospital is {nearestHospital} at a distance of{" "}
-            {distanceHospital}. Hospital Address: {address.address.commercial},{" "}
-            {address.address.road}, {address.address.state},
-            {address.address.postcode}.
-          </p>
-        </div>
-      )}
+  <Button onClick={findHospital} className="button">
+    Find Nearest Hospital
+  </Button>
 
-      
+  {nearestHospital && (
+    <div>
+      <p>
+        The nearest Hospital is {nearestHospital} at a distance of {distanceHospital}. Hospital Address:{" "}
+        {address.address.commercial}, {address.address.road}, {address.address.state}, {address.address.postcode}.
+      </p>
+    </div>
+  )}
 
-      <button onClick={gotoHome}>Go to Home</button>
-      {newAdresslatlon}
+  <Autocomplete
+  className="autocomplete"
+    disablePortal
+    id="combo-box-demo"
+    options={searchList.map((item) => item.display_name)}
+    sx={{ width: 300 }}
+    renderInput={(params) => <TextField onChange={(e) => setTextToSearch(e.target.value)} {...params} label="Enter Address" />}
+    onBlur={(e) => {
+      calculateDistance(e);
+    }}
+  />
 
-      <Autocomplete
-  disablePortal
-  id="combo-box-demo"
-  options= {searchList.map(item => item.display_name)}
-  sx={{ width: 300 }}
-  renderInput={(params) => <TextField
-    onChange={(e)=>setTextToSearch(e.target.value)}
-    
-    {...params} label="Enter Address" />
-  
-  
-  }
-  onBlur={(e) => {calculateDistance(e)}}
-/>
-    </header>
+</div>
+</div>
   );
 };
 
