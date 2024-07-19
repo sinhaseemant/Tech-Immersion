@@ -12,9 +12,7 @@
     "react-router-dom": "^6.24.1",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4",
-    "@mui/material": "^5.10.12",
-    "@mui/styles": "^5.15.14",
-    "@mui/system": "^5.15.6"
+    "@mui/material": "^5.16.4"
   },
   "scripts": {
     "start": "react-scripts start",
